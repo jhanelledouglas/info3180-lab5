@@ -48,6 +48,7 @@ def login():
         username = form.username.data
         password = form.password.data
 
+
         user = UserProfile.query.filter_by(username=username).first()
 
         if user is not None and check_password_hash(user.password, password):
@@ -61,7 +62,7 @@ def login():
                 flash('Logged in successfully', 'success')
 
                 next_page = request.args.get('next')
-                return redirect(next_page or url_for('home'))
+                return redirect(url_for('secure_page'))
         else:
             flash('Username or Password is incorrect.', 'danger')
 
